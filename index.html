@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X O GAME ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Setup Modal (Game Mode & Names) -->
+    <div class="modal-overlay" id="setupModal">
+        <div class="modal-box">
+            <h2>Game Setup 🎮</h2>
+            <p>Choose your preferred game mode:</p>
+            
+            <!-- Mode Selection Buttons -->
+            <div class="mode-selection">
+                <button type="button" class="mode-btn active" id="btnVsPlayer" onclick="selectMode('pvp')">👥 2 Players</button>
+                <button type="button" class="mode-btn" id="btnVsAi" onclick="selectMode('ai')">🤖 Vs AI</button>
+            </div>
+
+            <!-- Name Input Fields -->
+            <div class="inputs-container">
+                <div class="input-group">
+                    <label>Player 1 (X):</label>
+                    <input type="text" id="player1Input" placeholder="Enter name..." maxlength="12">
+                </div>
+
+                <div class="input-group" id="player2Group">
+                    <label>Player 2 (O):</label>
+                    <input type="text" id="player2Input" placeholder="Enter name..." maxlength="12">
+                </div>
+            </div>
+
+            <button id="startBtn" class="action-btn" onclick="startGame()">Start Battle 🔥</button>
+        </div>
+    </div>
+
+    <!-- Main Game Container -->
+    <div class="game-container">
+        
+        <header class="header">
+            <h1 class="main-title"><span>X</span> O <span>GAME</span></h1>
+            
+            <!-- Players Info & Match Scoreboard -->
+            <div class="players-bar">
+                <div class="player-card active-turn" id="cardP1">
+                    <span class="p-symbol x-color">X</span>
+                    <span class="p-name" id="nameP1">Player 1</span>
+                    <span class="p-score" id="scoreP1">0</span>
+                </div>
+                <div class="vs-badge">VS</div>
+                <div class="player-card" id="cardP2">
+                    <span class="p-symbol o-color">O</span>
+                    <span class="p-name" id="nameP2">Player 2</span>
+                    <span class="p-score" id="scoreP2">0</span>
+                </div>
+            </div>
+
+            <div class="high-score-bar">
+                Personal High Score 🏆: <span id="highScoreVal">0</span>
+            </div>
+        </header>
+
+        <!-- Status & Turn Indicator -->
+        <div class="status-bar" id="statusTitle">
+            Turn: <span id="turnLabel" class="x-color">Player 1 (X)</span>
+        </div>
+
+        <!-- 3x3 Grid Board -->
+        <div class="board" id="board">
+            <div class="square" id="item1" onclick="game('item1')"></div>
+            <div class="square" id="item2" onclick="game('item2')"></div>
+            <div class="square" id="item3" onclick="game('item3')"></div>
+
+            <div class="square" id="item4" onclick="game('item4')"></div>
+            <div class="square" id="item5" onclick="game('item5')"></div>
+            <div class="square" id="item6" onclick="game('item6')"></div>
+
+            <div class="square" id="item7" onclick="game('item7')"></div>
+            <div class="square" id="item8" onclick="game('item8')"></div>
+            <div class="square" id="item9" onclick="game('item9')"></div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="controls-area">
+            <button id="resetBtn" class="control-btn reset-btn hidden" onclick="resetBoard()">
+                🔄 Play Again
+            </button>
+            <button id="changeModeBtn" class="control-btn mode-switch-btn" onclick="openSetup()">
+                ⚙️ Change Mode
+            </button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

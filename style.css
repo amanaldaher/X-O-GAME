@@ -1,0 +1,359 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* إخفاء التظليل الأزرق المزعج وقت اللمس بالموبايل */
+}
+
+body {
+    background: radial-gradient(circle at top, #132a20, #08140f);
+    color: #e8f5e9;
+    min-height: 100vh;
+    min-height: 100dvh; /* لدعم شريط المتصفح بالموبايل بسلاسة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+/* بطاقة اللعبة المركزية - متجاوبة ومرنة */
+.game-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(168, 230, 207, 0.12);
+    border-radius: 24px;
+    padding: clamp(16px, 4vw, 25px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 40px rgba(0, 245, 160, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+}
+
+/* العنوان الرئيسي */
+.main-title {
+    font-size: clamp(22px, 6vw, 28px);
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.main-title span:first-child { color: #00f5a0; }
+.main-title span:last-child { color: #56ab2f; }
+
+/* بطاقات اللاعبين */
+.players-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.player-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 8px 6px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    min-width: 0; /* منع خروج النصوص الطويلة برا البطاقة */
+}
+
+.player-card.active-turn {
+    border-color: rgba(0, 245, 160, 0.6);
+    background: rgba(0, 245, 160, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 245, 160, 0.15);
+}
+
+.player-card#cardP2.active-turn {
+    border-color: rgba(168, 255, 120, 0.6);
+    background: rgba(168, 255, 120, 0.08);
+    box-shadow: 0 4px 15px rgba(168, 255, 120, 0.15);
+}
+
+.p-symbol {
+    font-size: clamp(15px, 4vw, 18px);
+    font-weight: 800;
+}
+
+.p-name {
+    font-size: clamp(12px, 3.2vw, 14px);
+    color: #d4ebd9;
+    margin: 2px 0;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.p-score {
+    font-size: clamp(16px, 4.5vw, 18px);
+    font-weight: 800;
+    color: #bbf7d0;
+}
+
+.vs-badge {
+    font-weight: 800;
+    font-size: 11px;
+    color: #4e705b;
+}
+
+/* شريط السكور القياسي */
+.high-score-bar {
+    font-size: clamp(11px, 3vw, 13px);
+    color: #8fa898;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.high-score-bar span {
+    color: #a8ff78;
+    font-weight: bold;
+}
+
+/* شريط الدور */
+.status-bar {
+    width: 100%;
+    background: rgba(8, 20, 15, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: clamp(13px, 3.5vw, 15px);
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+/* شبكة اللعب - قياس مرن بحسب الشاشة */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(6px, 2vw, 10px);
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.square {
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: clamp(12px, 3vw, 16px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(32px, 9vw, 44px);
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+/* تأثير الـ Hover فقط للأجهزة اللي بتدعم الماوس (لابتوب/كمبيوتر) */
+@media (hover: hover) {
+    .square:hover {
+        background: rgba(0, 245, 160, 0.08);
+        border-color: rgba(0, 245, 160, 0.3);
+        transform: translateY(-2px);
+    }
+}
+
+/* تأثير اللمس للموبايل والتاب */
+.square:active {
+    transform: scale(0.96);
+    background: rgba(0, 245, 160, 0.12);
+}
+
+/* ألوان الرموز */
+.x-color {
+    color: #00f5a0;
+    text-shadow: 0 0 16px rgba(0, 245, 160, 0.6);
+}
+
+.o-color {
+    color: #a8ff78;
+    text-shadow: 0 0 16px rgba(168, 255, 120, 0.6);
+}
+
+/* المربعات الفائزة */
+.square.winner-square {
+    background: linear-gradient(135deg, rgba(0, 245, 160, 0.25), rgba(168, 255, 120, 0.25));
+    border-color: #00f5a0;
+    transform: scale(1.03);
+    animation: pulse 1.2s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(0, 245, 160, 0.3); }
+    100% { box-shadow: 0 0 22px rgba(168, 255, 120, 0.7); }
+}
+
+/* أزرار التحكم */
+.controls-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.control-btn {
+    width: 100%;
+    padding: clamp(10px, 3vw, 12px);
+    border: none;
+    border-radius: 12px;
+    font-size: clamp(13px, 3.5vw, 15px);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #00f5a0, #00d2ff);
+    color: #08140f;
+    box-shadow: 0 4px 15px rgba(0, 245, 160, 0.25);
+}
+
+.mode-switch-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #9abfa6;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hidden {
+    display: none;
+}
+
+/* نافذة البداية المنبثقة */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 10, 8, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 15px;
+}
+
+.modal-box {
+    background: #0f241a;
+    border: 1px solid rgba(168, 230, 207, 0.15);
+    padding: clamp(20px, 5vw, 28px);
+    border-radius: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+}
+
+.modal-box h2 {
+    font-size: clamp(18px, 5vw, 22px);
+    margin-bottom: 6px;
+    color: #00f5a0;
+}
+
+.modal-box p {
+    font-size: 13px;
+    color: #8fa898;
+    margin-bottom: 14px;
+}
+
+.mode-selection {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 10px 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #8fa898;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.mode-btn.active {
+    background: rgba(0, 245, 160, 0.15);
+    border-color: #00f5a0;
+    color: #00f5a0;
+}
+
+.inputs-container {
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 12px;
+    color: #a3c4b0;
+    margin-bottom: 4px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #08140f;
+    color: #e8f5e9;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #00f5a0;
+    box-shadow: 0 0 10px rgba(0, 245, 160, 0.2);
+}
+
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: linear-gradient(135deg, #00f5a0, #56ab2f);
+    color: #08140f;
+    font-weight: 800;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+/* شاشات الموبايل الصغيرة جداً */
+@media (max-width: 360px) {
+    .board {
+        gap: 6px;
+    }
+    .square {
+        border-radius: 10px;
+    }
+    .game-container {
+        padding: 12px;
+    }
+}
