@@ -16,7 +16,6 @@ The project features multiple gameplay modes, an intelligent automated AI oppone
 Check out the live game here:  
 👉 [Play X O GAME](https://amanaldaher.github.io/X-O-GAME/)
 
-*(Make sure to update the URL with your exact repository name if different)*
 
 <hr>
 
