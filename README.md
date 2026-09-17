@@ -5,7 +5,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Google Fonts](https://img.shields.io/badge/Google_Fonts-4285F4?style=for-the-badge&logo=google-fonts&logoColor=white)](https://fonts.google.com/)
 
-A modern, responsive, and aesthetically pleasing Tic Tac Toe web application crafted with a custom dark emerald & sage-green glassmorphism aesthetic.
+A modern, responsive, and aesthetically pleasing X O GAME web application crafted with a custom dark emerald & sage-green glassmorphism aesthetic.
 
 The project features multiple gameplay modes, an intelligent automated AI opponent, per-user high score persistence, and a touch-optimized responsive layout for seamless gaming across all devices.
 
@@ -55,11 +55,11 @@ Check out the live game here:
 Clone the repository:
 
 Bash
-git clone [https://github.com/amanaldaher/XO-GAME.git](https://github.com/amanaldaher/XO-GAME.git)
+git clone [https://github.com/amanaldaher/X-O-GAME.git](https://github.com/amanaldaher/X-O-GAME.git)
 Navigate to the project directory:
 
 Bash
-cd XO-GAME
+cd X-O-GAME
 Open the project:
 
 Double-click index.html to launch it directly in your preferred browser.
